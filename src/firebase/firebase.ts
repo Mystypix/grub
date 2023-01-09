@@ -1,11 +1,10 @@
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
+const firebaseConfig = {};
 
 // Initialize Firebase
-// initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
 // Initialize Firebase Auth
-// const auth = getAuth();
-
-// export { auth };
+export const auth = getAuth(firebase);
