@@ -1,6 +1,6 @@
 import { useAuthUser } from "@react-query-firebase/auth";
 import { auth } from "./firebase/firebase";
-import css from './app.module.scss';
+import css from "./app.module.scss";
 
 function App() {
   const user = useAuthUser(["user"], auth);
@@ -16,4 +16,4 @@ function App() {
   return <div>Not signed in.</div>;
 }
 
-export default App
+export default App;

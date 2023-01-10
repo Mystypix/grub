@@ -1,1 +1,1 @@
-export const Navbar = () => <div>Navbar</div>
+export const Navbar = () => <div>Navbar</div>;

@@ -1,1 +1,1 @@
-export const Layout = () => <div>Layout</div>
+export const Layout = () => <div>Layout</div>;
