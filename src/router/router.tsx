@@ -6,6 +6,8 @@ import { SignUp } from "../pages/signUp/signUp";
 import { PrivateRoutes } from "./privateRoutes";
 import { Layout } from "../components/layout/layout";
 import { PublicRoutes } from "./publicRoutes";
+import { AddRecipe } from "../pages/add-recipe/add-recipe";
+import { MyRecipes } from "../pages/my-recipes/my-recipes";
 
 export const Router = () => {
   return (
@@ -14,7 +16,8 @@ export const Router = () => {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard" />
-            <Route element={<div>TESSST</div>} path="/test" />
+            <Route element={<AddRecipe />} path="/add-recipe" />
+            <Route element={<MyRecipes />} path="/my-recipes" />
           </Route>
           <Route element={<PublicRoutes />}>
             <Route element={<Intro />} path="/" />

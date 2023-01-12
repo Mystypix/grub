@@ -1,0 +1,12 @@
+.label {
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.input {
+  border-radius: 3px;
+  border: 1px solid var(--input-border-color);
+  padding: 0 15px;
+  line-height: 30px;
+}
