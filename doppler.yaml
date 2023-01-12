@@ -1,0 +1,3 @@
+setup:
+  project: grub
+  config: dev

@@ -3,10 +3,10 @@ import { useAuthUser } from "@react-query-firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Loader } from "../components/loader/loader";
 
-export const PrivateRoutes = () => {
+export const PublicRoutes = () => {
   const user = useAuthUser(["user"], auth);
 
   if (user.isLoading) return <Loader />;
 
-  return user.data ? <Outlet /> : <Navigate to="/sign-in" />;
+  return !user.data ? <Outlet /> : <Navigate to="/dashboard" />;
 };
