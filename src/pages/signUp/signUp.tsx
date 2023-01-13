@@ -3,22 +3,23 @@ import { auth } from "../../firebase/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import css from "./signUp.module.scss";
+import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const mutation = useAuthCreateUserWithEmailAndPassword(auth, {
+  const emailMutation = useAuthCreateUserWithEmailAndPassword(auth, {
     onError(error) {
       console.error(error);
     },
   });
 
   const handleSignUp = () => {
-    mutation.mutate({ email, password });
+    emailMutation.mutate({ email, password });
 
-    if (mutation.isSuccess) {
+    if (emailMutation.isSuccess) {
       navigate("/dashboard");
     }
   };
@@ -39,13 +40,16 @@ export const SignUp = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {mutation.isError && <div>{mutation.error.message}</div>}
-        <button disabled={mutation.isLoading} onClick={handleSignUp}>
+        {emailMutation.isError && <div>{emailMutation.error.message}</div>}
+        <button disabled={emailMutation.isLoading} onClick={handleSignUp}>
           Sign up
         </button>
       </form>
       <div>---OR---</div>
-      <button>Sign up with Google</button>
+      <GoogleAuthButton
+        disabled={emailMutation.isLoading}
+        text="Sign up with Google"
+      />
       <div>-------------------</div>
       <div>
         <div>Already have an account?</div>

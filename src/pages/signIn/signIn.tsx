@@ -1,9 +1,7 @@
-import {
-  useAuthSignInWithEmailAndPassword,
-  useAuthUser,
-} from "@react-query-firebase/auth";
+import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 import { auth } from "../../firebase/firebase";
 import css from "./signIn.module.scss";
 
@@ -45,7 +43,10 @@ export const SignIn = () => {
         Sign in
       </button>
       <div>---OR---</div>
-      <button disabled={mutation.isLoading}>Sign in with Google</button>
+      <GoogleAuthButton
+        disabled={mutation.isLoading}
+        text="Sign up with Google"
+      />
       <div>-------------------</div>
       <div>
         <div>Not having an account yet?</div>
