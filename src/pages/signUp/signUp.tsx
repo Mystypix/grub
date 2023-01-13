@@ -10,16 +10,16 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const emailMutation = useAuthCreateUserWithEmailAndPassword(auth, {
+  const mutation = useAuthCreateUserWithEmailAndPassword(auth, {
     onError(error) {
       console.error(error);
     },
   });
 
   const handleSignUp = () => {
-    emailMutation.mutate({ email, password });
+    mutation.mutate({ email, password });
 
-    if (emailMutation.isSuccess) {
+    if (mutation.isSuccess) {
       navigate("/dashboard");
     }
   };
@@ -40,14 +40,14 @@ export const SignUp = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {emailMutation.isError && <div>{emailMutation.error.message}</div>}
-        <button disabled={emailMutation.isLoading} onClick={handleSignUp}>
+        {mutation.isError && <div>{mutation.error.message}</div>}
+        <button disabled={mutation.isLoading} onClick={handleSignUp}>
           Sign up
         </button>
       </form>
       <div>---OR---</div>
       <GoogleAuthButton
-        disabled={emailMutation.isLoading}
+        disabled={mutation.isLoading}
         text="Sign up with Google"
       />
       <div>-------------------</div>
