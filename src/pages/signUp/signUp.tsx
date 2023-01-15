@@ -3,6 +3,7 @@ import { auth } from "../../firebase/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import css from "./signUp.module.scss";
+import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -45,7 +46,10 @@ export const SignUp = () => {
         </button>
       </form>
       <div>---OR---</div>
-      <button>Sign up with Google</button>
+      <GoogleAuthButton
+        disabled={mutation.isLoading}
+        text="Sign up with Google"
+      />
       <div>-------------------</div>
       <div>
         <div>Already have an account?</div>
