@@ -1,6 +1,6 @@
 # Eat this
 
-This project have two purposes. It serves as a project which should mimic real flow in tech product company as form of mentoring and preparing for future carier of @karfous (and hopefully easier entrance to the development world). Second puprouse is to use the application in real life to ease the decision making what to cook and eat.
+This project have two purposes. It serves as a project which should mimic real flow in tech product company as form of mentoring and preparing for future carier of @karfous (and hopefully easier entrance to the development world). Second purpouse is to use the application in real life to ease the decision making what to cook and eat.
 
 ## Repository setup
 
