@@ -26,7 +26,7 @@ Note: you can add alias to the terminal config (`.bashrc`, `.zshrc...`) like `al
 
 ## How to run dev
 
-- `pnpm run dev`
+- `pnpm dev`
 
 ## Development workflow
 
