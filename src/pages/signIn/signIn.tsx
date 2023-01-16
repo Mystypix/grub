@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 import { auth } from "../../firebase/firebase";
+import { Input } from "../../components/input/input";
 import css from "./signIn.module.scss";
 
 export const SignIn = () => {
@@ -27,17 +28,21 @@ export const SignIn = () => {
   return (
     <div className={css.wrapper}>
       <h1>Sign in</h1>
-      <input
-        style={{ border: "1px solid gray" }}
-        type="email"
+      <Input
+        label="Enter your email"
+        name="Email"
         placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        onChange={setEmail}
+        type="email"
       />
-      <input
-        style={{ border: "1px solid gray" }}
-        type="password"
+      <Input
+        label="Your secrete password"
+        name="Password"
         placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        onChange={setPassword}
+        type="password"
       />
       <button disabled={mutation.isLoading} onClick={handleSignIn}>
         Sign in
