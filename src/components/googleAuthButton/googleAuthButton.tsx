@@ -1,6 +1,7 @@
 import { useAuthSignInWithPopup } from "@react-query-firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { DataTestIds } from "../../../common/const/data-testid";
 import { auth } from "../../firebase/firebase";
 
 interface GoogleAuthButtonProps {
@@ -24,6 +25,7 @@ export const GoogleAuthButton = ({ disabled, text }: GoogleAuthButtonProps) => {
 
   return (
     <button
+      data-testid={DataTestIds.GoogleAuthButton}
       disabled={disabled || mutation.isLoading}
       onClick={handleGoogleAuthClick}
     >
