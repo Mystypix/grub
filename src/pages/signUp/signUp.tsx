@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import css from "./signUp.module.scss";
 import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
+import { Input } from "../../components/input/input";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -28,17 +29,21 @@ export const SignUp = () => {
     <div className={css.wrapper}>
       <h1>Sign up</h1>
       <form>
-        <input
-          style={{ border: "1px solid gray" }}
-          type="email"
+        <Input
+          label="Enter your email"
+          name="Email"
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          onChange={setEmail}
+          type="email"
         />
-        <input
-          style={{ border: "1px solid gray" }}
-          type="password"
+        <Input
+          label="Your secrete password"
+          name="Password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={setPassword}
+          type="password"
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
         <button disabled={mutation.isLoading} onClick={handleSignUp}>
