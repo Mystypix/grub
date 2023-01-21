@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import css from "./signUp.module.scss";
 import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
+import { Button } from "../../components/button/button";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -41,9 +42,15 @@ export const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
-        <button disabled={mutation.isLoading} onClick={handleSignUp}>
+        <Button
+          name="sign-in"
+          type="submit"
+          variant="primary"
+          onClick={handleSignUp}
+          disabled={mutation.isLoading}
+        >
           Sign up
-        </button>
+        </Button>
       </form>
       <div>---OR---</div>
       <GoogleAuthButton

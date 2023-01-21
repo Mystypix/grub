@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 import { auth } from "../../firebase/firebase";
+import { Button } from "../../components/button/button";
 import css from "./signIn.module.scss";
 
 export const SignIn = () => {
@@ -39,9 +40,16 @@ export const SignIn = () => {
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button disabled={mutation.isLoading} onClick={handleSignIn}>
+      <Button
+        name="sign-in"
+        type="submit"
+        variant="primary"
+        onClick={handleSignIn}
+        disabled={mutation.isLoading}
+      >
         Sign in
-      </button>
+      </Button>
+
       <div>---OR---</div>
       <GoogleAuthButton
         disabled={mutation.isLoading}

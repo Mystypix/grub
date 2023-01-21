@@ -10,7 +10,7 @@ export const Intro = () => {
       <Button
         name="sign-in"
         type="button"
-        priority="primary"
+        variant="general"
         onClick={() => navigate("/sign-in")}
       >
         Sign in
@@ -18,7 +18,7 @@ export const Intro = () => {
       <Button
         name="sign-up"
         type="button"
-        priority="secondary"
+        variant="general"
         onClick={() => navigate("/sign-up")}
       >
         Sign up

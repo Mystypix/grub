@@ -3,8 +3,9 @@ import css from "./button.module.scss";
 interface ButtonProps {
   name: string;
   type: string;
-  children: string;
-  priority: string;
+  children?: string;
+  variant: string;
+  disabled?: boolean;
   onClick: (value: string) => void;
 }
 
@@ -12,7 +13,8 @@ export const Button = ({
   name,
   type,
   children,
-  priority,
+  variant,
+  disabled,
   onClick,
 }: ButtonProps) => {
   const onClickHandler = (e: any) => {
@@ -23,9 +25,10 @@ export const Button = ({
       {children && (
         <button
           onClick={onClickHandler}
-          className={css.btn + " " + css[priority]}
+          className={css.btn + " " + css[variant]}
           type={type}
           name={name}
+          disabled={disabled}
         >
           {children}
         </button>
