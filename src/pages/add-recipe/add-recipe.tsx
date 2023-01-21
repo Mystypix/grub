@@ -24,10 +24,9 @@ export const AddRecipe = () => {
         <Input
           label="Name of the recipe"
           name="recipeName"
-          placeholder=""
-          value={name}
           onChange={setName}
           type="text"
+          value={name}
         />
         {mutation.isError && <p>{mutation.error.message}</p>}
         <button disabled={mutation.isLoading} onClick={handleSave}>

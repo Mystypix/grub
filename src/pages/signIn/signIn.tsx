@@ -31,18 +31,18 @@ export const SignIn = () => {
       <Input
         label="Enter your email"
         name="Email"
-        placeholder="Email"
-        value={email}
         onChange={setEmail}
+        placeholder="Email"
         type="email"
+        value={email}
       />
       <Input
-        label="Your secrete password"
+        label="Your secret password"
         name="Password"
-        placeholder="Password"
-        value={password}
         onChange={setPassword}
+        placeholder="Password"
         type="password"
+        value={password}
       />
       <button disabled={mutation.isLoading} onClick={handleSignIn}>
         Sign in

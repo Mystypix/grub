@@ -32,18 +32,18 @@ export const SignUp = () => {
         <Input
           label="Enter your email"
           name="Email"
-          placeholder="Email"
-          value={email}
           onChange={setEmail}
+          placeholder="Email"
           type="email"
+          value={email}
         />
         <Input
           label="Your secrete password"
           name="Password"
-          placeholder="Password"
-          value={password}
           onChange={setPassword}
+          placeholder="Password"
           type="password"
+          value={password}
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
         <button disabled={mutation.isLoading} onClick={handleSignUp}>
