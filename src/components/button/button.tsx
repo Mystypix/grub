@@ -1,10 +1,11 @@
+import React, { SyntheticEvent } from "react";
 import css from "./button.module.scss";
 
 interface ButtonProps {
   children?: string;
   disabled?: boolean;
   name: string;
-  onClick: (value: string) => void;
+  onClick: (value: SyntheticEvent<HTMLButtonElement>) => void;
   type: string;
   variant: string;
 }
@@ -17,7 +18,7 @@ export const Button = ({
   type,
   variant,
 }: ButtonProps) => {
-  const onClickHandler = (e: any) => {
+  const onClickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
     onClick(e);
   };
   return (
