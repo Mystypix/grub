@@ -10,6 +10,7 @@ specifiers:
   "@typescript-eslint/eslint-plugin": ^5.0.0
   "@typescript-eslint/parser": ^5.0.0
   "@vitejs/plugin-react-swc": ^3.0.0
+  clsx: ^1.2.1
   eslint: ^8.0.1
   eslint-config-prettier: ^8.6.0
   eslint-config-standard-with-typescript: ^26.0.0
@@ -53,6 +54,7 @@ devDependencies:
   "@types/react-dom": 18.0.10
   "@typescript-eslint/eslint-plugin": 5.48.0_k73wpmdolxikpyqun3p36akaaq
   "@vitejs/plugin-react-swc": 3.0.1_vite@4.0.4
+  clsx: 1.2.1
   eslint: 8.31.0
   eslint-config-prettier: 8.6.0_eslint@8.31.0
   eslint-config-standard-with-typescript: 26.0.0_dyaaefhmaguqu3pb32etjuzdjm
@@ -2007,6 +2009,14 @@ packages:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
     dev: false
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: ">=6" }
+    dev: true
 
   /color-convert/1.9.3:
     resolution:
