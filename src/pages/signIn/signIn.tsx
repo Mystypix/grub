@@ -41,11 +41,11 @@ export const SignIn = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
+        disabled={mutation.isLoading}
         name="sign-in"
+        onClick={handleSignIn}
         type="submit"
         variant="primary"
-        onClick={handleSignIn}
-        disabled={mutation.isLoading}
       >
         Sign in
       </Button>

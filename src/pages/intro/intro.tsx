@@ -9,17 +9,17 @@ export const Intro = () => {
       <h1>Intro page</h1>
       <Button
         name="sign-in"
+        onClick={() => navigate("/sign-in")}
         type="button"
         variant="general"
-        onClick={() => navigate("/sign-in")}
       >
         Sign in
       </Button>
       <Button
         name="sign-up"
+        onClick={() => navigate("/sign-up")}
         type="button"
         variant="general"
-        onClick={() => navigate("/sign-up")}
       >
         Sign up
       </Button>

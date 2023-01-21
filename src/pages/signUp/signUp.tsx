@@ -43,11 +43,11 @@ export const SignUp = () => {
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
         <Button
+          disabled={mutation.isLoading}
           name="sign-in"
+          onClick={handleSignUp}
           type="submit"
           variant="primary"
-          onClick={handleSignUp}
-          disabled={mutation.isLoading}
         >
           Sign up
         </Button>

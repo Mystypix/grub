@@ -1,21 +1,21 @@
 import css from "./button.module.scss";
 
 interface ButtonProps {
-  name: string;
-  type: string;
   children?: string;
-  variant: string;
   disabled?: boolean;
+  name: string;
   onClick: (value: string) => void;
+  type: string;
+  variant: string;
 }
 
 export const Button = ({
-  name,
-  type,
   children,
-  variant,
   disabled,
+  name,
   onClick,
+  type,
+  variant,
 }: ButtonProps) => {
   const onClickHandler = (e: any) => {
     onClick(e);
@@ -24,11 +24,11 @@ export const Button = ({
     <div className={css.wrapper}>
       {children && (
         <button
-          onClick={onClickHandler}
           className={css.btn + " " + css[variant]}
-          type={type}
-          name={name}
           disabled={disabled}
+          name={name}
+          onClick={onClickHandler}
+          type={type}
         >
           {children}
         </button>
