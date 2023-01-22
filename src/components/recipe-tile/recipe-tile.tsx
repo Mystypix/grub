@@ -1,6 +1,7 @@
 import React from "react";
 import css from "./recipe-tile.module.scss";
 import RecipeInterface from "../../interfaces/recipe";
+import { useNavigate } from "react-router-dom";
 // TODO JaKa import rating component
 // TODO JaKa import like button component
 
@@ -12,9 +13,15 @@ export const RecipeTile = ({ isFavorite, recipeData }: RecipeTileInputs) => {
   // TODO JaKa like will be replaced by a like button component
   // TODO JaKa image from a database
   // TODO JaKa rating will be replace by a rating component
+  const navigate = useNavigate();
 
   return (
-    <div className={css["recipe-tile"]}>
+    <div
+      className={css["recipe-tile"]}
+      onClick={() => {
+        navigate(`/recipe/${recipeData.id}`);
+      }}
+    >
       <button className={isFavorite ? css["add-to-favorite"] : ""}>Like</button>
       <img src="food.webp" className={css["recipe-image"]} /> // TODO binary
       format in db
