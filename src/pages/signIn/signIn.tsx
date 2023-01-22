@@ -25,13 +25,20 @@ export const SignIn = () => {
     }
   };
 
+  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+  };
+  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+  };
+
   return (
     <div className={css.wrapper}>
       <h1>Sign in</h1>
       <Input
         label="Enter your email"
         name="Email"
-        onChange={setEmail}
+        onChange={setEmailHandler}
         placeholder="Email"
         type="email"
         value={email}
@@ -39,7 +46,7 @@ export const SignIn = () => {
       <Input
         label="Your secret password"
         name="Password"
-        onChange={setPassword}
+        onChange={setPasswordHandler}
         placeholder="Password"
         type="password"
         value={password}
