@@ -1,12 +1,11 @@
-import React, { SyntheticEvent } from "react";
 import css from "./button.module.scss";
 
 interface ButtonProps {
-  children?: string;
+  children: string;
   disabled?: boolean;
   name: string;
-  onClick: (value: SyntheticEvent<HTMLButtonElement>) => void;
-  type: string;
+  onClick: () => void;
+  type: "submit" | "reset" | "button" | undefined;
   variant: string;
 }
 
@@ -18,22 +17,15 @@ export const Button = ({
   type,
   variant,
 }: ButtonProps) => {
-  const onClickHandler = (e: SyntheticEvent<HTMLButtonElement>) => {
-    onClick(e);
-  };
   return (
-    <div className={css.wrapper}>
-      {children && (
-        <button
-          className={css.btn + " " + css[variant]}
-          disabled={disabled}
-          name={name}
-          onClick={onClickHandler}
-          type={type}
-        >
-          {children}
-        </button>
-      )}
-    </div>
+    <button
+      className={css.btn + " " + css[variant]}
+      disabled={disabled}
+      name={name}
+      onClick={onClick}
+      type={type}
+    >
+      {children}
+    </button>
   );
 };
