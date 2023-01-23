@@ -1,6 +1,6 @@
 // TODO I should make mobile first approach - styles should be prepared for mobile device and then with media query changed to be suitable for desktop
 
-.recipe-tile {
+.recipeTile {
   position: relative;
   padding: 10px;
   // display: flex;
@@ -8,22 +8,18 @@
   // margin-bottom: 16px;
 }
 
-.recipe-image {
+.recipePreview {
   width: 100%;
   height: 80%;
   object-fit: cover;
 }
 
-.recipe-info {
-  margin-left: 16px;
-}
-
-.recipe-header {
+.recipeHeader {
   font-size: 24px;
   margin-bottom: 8px;
 }
 
-.add-to-favorite {
+.isFavorite {
   position: absolute;
   top: 15%;
   right: 20%;
