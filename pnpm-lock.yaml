@@ -10,6 +10,7 @@ specifiers:
   "@typescript-eslint/eslint-plugin": ^5.0.0
   "@typescript-eslint/parser": ^5.0.0
   "@vitejs/plugin-react-swc": ^3.0.0
+  clsx: ^1.2.1
   eslint: ^8.0.1
   eslint-config-prettier: ^8.6.0
   eslint-config-standard-with-typescript: ^26.0.0
@@ -39,6 +40,7 @@ dependencies:
   "@react-query-firebase/auth": 1.0.0-dev.2_r75r7mdpcaa2dw4axgpurkf2ne
   "@react-query-firebase/firestore": 1.0.0-dev.7_r75r7mdpcaa2dw4axgpurkf2ne
   "@typescript-eslint/parser": 5.48.0_iukboom6ndih5an6iafl45j2fe
+  clsx: 1.2.1
   firebase: 9.15.0
   postcss: 8.4.21
   react: 18.2.0
@@ -2006,6 +2008,14 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: false
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: ">=6" }
     dev: false
 
   /color-convert/1.9.3:
