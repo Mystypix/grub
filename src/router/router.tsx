@@ -16,10 +16,11 @@ export const Router = () => {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard" />
-            <Route element={<AddRecipe />} path="/add-recipe" />
             <Route element={<MyRecipes />} path="/my-recipes" />
           </Route>
           <Route element={<PublicRoutes />}>
+            <Route element={<AddRecipe />} path="/add-recipe" /> // TODO JaKa I
+            have made it public for a while
             <Route element={<Intro />} path="/" />
             <Route element={<SignIn />} path="/sign-in" />
             <Route element={<SignUp />} path="/sign-up" />
