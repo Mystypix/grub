@@ -1,0 +1,27 @@
+// I like this one https://codepen.io/kathykato/pen/rZRaNe
+.btn {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+  transition: filter 0.5s ease-in-out;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &.primary {
+    background-color: rgb(238, 91, 11);
+  }
+
+  &.secondary {
+    background-color: rgb(88, 131, 224);
+  }
+
+  &.general {
+    background-color: rgb(169, 170, 173);
+  }
+}

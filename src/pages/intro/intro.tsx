@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/button/button";
 
 export const Intro = () => {
   const navigate = useNavigate();
@@ -6,8 +7,22 @@ export const Intro = () => {
   return (
     <div>
       <h1>Intro page</h1>
-      <button onClick={() => navigate("/sign-in")}>Sign in</button>
-      <button onClick={() => navigate("/sign-up")}>Sign up</button>
+      <Button
+        name="sign-in"
+        onClick={() => navigate("/sign-in")}
+        type="button"
+        variant="general"
+      >
+        Sign in
+      </Button>
+      <Button
+        name="sign-up"
+        onClick={() => navigate("/sign-up")}
+        type="button"
+        variant="general"
+      >
+        Sign up
+      </Button>
     </div>
   );
 };
