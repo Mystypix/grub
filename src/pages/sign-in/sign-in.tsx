@@ -1,10 +1,10 @@
 import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
+import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
 import { auth } from "../../firebase/firebase";
 import { Button } from "../../components/button/button";
-import css from "./signIn.module.scss";
+import css from "./sign-in.module.scss";
 
 export const SignIn = () => {
   const navigate = useNavigate();
