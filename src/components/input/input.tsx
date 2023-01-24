@@ -4,8 +4,8 @@ import css from "./input.module.scss";
 interface InputProps {
   label?: string;
   name: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
+  onChange: (s: string) => void; // will setState for a form everytime input is changed
+  placeholder: string; // hint for a user
   type: string;
   value: string;
 }
@@ -18,6 +18,9 @@ export const Input = ({
   type,
   value,
 }: InputProps) => {
+  function onChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    onChange(event.currentTarget.value);
+  }
   return (
     <div className={css.wrapper}>
       {label && (
@@ -27,8 +30,9 @@ export const Input = ({
       )}
       <input
         className={css.input}
+        id={name}
         name={name}
-        onChange={onChange}
+        onChange={onChangeHandler}
         placeholder={placeholder}
         type={type}
         value={value}
