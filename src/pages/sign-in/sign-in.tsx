@@ -1,10 +1,11 @@
 import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
+import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
 import { auth } from "../../firebase/firebase";
 import { Input } from "../../components/input/input";
-import css from "./signIn.module.scss";
+import { Button } from "../../components/button/button";
+import css from "./sign-in.module.scss";
 
 export const SignIn = () => {
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ export const SignIn = () => {
     }
   };
 
-  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
+  const setEmailHandler = (value: string) => {
+    setEmail(value);
   };
-  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
+  const setPasswordHandler = (value: string) => {
+    setPassword(value);
   };
 
   return (
@@ -51,9 +52,16 @@ export const SignIn = () => {
         type="password"
         value={password}
       />
-      <button disabled={mutation.isLoading} onClick={handleSignIn}>
+      <Button
+        disabled={mutation.isLoading}
+        name="sign-in"
+        onClick={handleSignIn}
+        type="submit"
+        variant="primary"
+      >
         Sign in
-      </button>
+      </Button>
+
       <div>---OR---</div>
       <GoogleAuthButton
         disabled={mutation.isLoading}

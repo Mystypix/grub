@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignIn } from "../pages/signIn/signIn";
+import { SignIn } from "../pages/sign-in/sign-in";
 import { Dashboard } from "../pages/dashboard/dashboard";
 import { Intro } from "../pages/intro/intro";
-import { SignUp } from "../pages/signUp/signUp";
-import { PrivateRoutes } from "./privateRoutes";
+import { SignUp } from "../pages/sign-up/sign-up";
+import { PrivateRoutes } from "./private-routes";
 import { Layout } from "../components/layout/layout";
-import { PublicRoutes } from "./publicRoutes";
+import { PublicRoutes } from "./public-routes";
 import { AddRecipe } from "../pages/add-recipe/add-recipe";
 import { MyRecipes } from "../pages/my-recipes/my-recipes";
 

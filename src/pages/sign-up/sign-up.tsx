@@ -2,9 +2,10 @@ import { useAuthCreateUserWithEmailAndPassword } from "@react-query-firebase/aut
 import { auth } from "../../firebase/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import css from "./signUp.module.scss";
-import { GoogleAuthButton } from "../../components/googleAuthButton/googleAuthButton";
 import { Input } from "../../components/input/input";
+import { Button } from "../../components/button/button";
+import css from "./sign-up.module.scss";
+import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ export const SignUp = () => {
     }
   };
 
-  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
+  const setEmailHandler = (value: string) => {
+    setEmail(value);
   };
-  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
+  const setPasswordHandler = (value: string) => {
+    setPassword(value);
   };
 
   return (
@@ -53,9 +54,15 @@ export const SignUp = () => {
           value={password}
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
-        <button disabled={mutation.isLoading} onClick={handleSignUp}>
+        <Button
+          disabled={mutation.isLoading}
+          name="sign-in"
+          onClick={handleSignUp}
+          type="submit"
+          variant="primary"
+        >
           Sign up
-        </button>
+        </Button>
       </form>
       <div>---OR---</div>
       <GoogleAuthButton
