@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: dopplerhq/cli-action@v2
+      - name: Test CLI
+        run: doppler --version
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
