@@ -1,0 +1,53 @@
+.wrapper {
+  position: relative;
+}
+
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  cursor: pointer;
+
+  &.open {
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.25s;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-radius: 6px;
+  padding: var(--spacing-3);
+  background: #fff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  padding: 0 var(--spacing-2);
+  min-height: 30px;
+  cursor: pointer;
+
+  &:hover {
+    background: #aaa;
+  }
+
+  + .menuItem {
+    margin-top: var(--spacing-2);
+  }
+
+  .icon {
+    margin-right: var(--spacing-3);
+  }
+}

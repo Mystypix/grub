@@ -1,9 +1,10 @@
 interface IconProps {
+  className?: string;
   src: string;
 }
 
-export const Icon = ({ src }: IconProps) => (
-  <svg>
+export const Icon = ({ className, src }: IconProps) => (
+  <svg className={className}>
     <use xlinkHref={`#${src}`} />
   </svg>
 );

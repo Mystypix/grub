@@ -1,6 +1,6 @@
-import { useAuthSignOut, useAuthUser } from "@react-query-firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useAuthUser } from "@react-query-firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { Navbar } from "../navbar/navbar";
 import css from "./layout.module.scss";
 
 interface LayoutProps {
@@ -8,25 +8,11 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const navigate = useNavigate();
-  const mutation = useAuthSignOut(auth);
   const user = useAuthUser(["user"], auth);
-
-  const handleLogout = () => {
-    mutation.mutate();
-
-    if (mutation.isSuccess) {
-      navigate("/");
-    }
-  };
 
   return (
     <div className={css.wrapper}>
-      {user.data && (
-        <button className={css.logout} onClick={handleLogout}>
-          Logout
-        </button>
-      )}
+      {user.data && <Navbar />}
       <div>{children}</div>
     </div>
   );

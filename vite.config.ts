@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     createSvgSpritePlugin({
       symbolId: "icon-[name]-[hash]",
+      svgo: false,
     }),
   ],
   css: {
