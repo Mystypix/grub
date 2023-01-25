@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: dopplerhq/cli-action@v2
       - name: Setup dopler
-        run: doppler setup
+        run: doppler secrets --only-names
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
