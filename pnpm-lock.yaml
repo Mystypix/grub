@@ -11,6 +11,7 @@ specifiers:
   "@typescript-eslint/parser": ^5.0.0
   "@vitejs/plugin-react-swc": ^3.0.0
   clsx: ^1.2.1
+  dotenv-vault-core: ^0.6.1
   eslint: ^8.0.1
   eslint-config-prettier: ^8.6.0
   eslint-config-standard-with-typescript: ^26.0.0
@@ -41,6 +42,7 @@ dependencies:
   "@react-query-firebase/auth": 1.0.0-dev.2_r75r7mdpcaa2dw4axgpurkf2ne
   "@react-query-firebase/firestore": 1.0.0-dev.7_r75r7mdpcaa2dw4axgpurkf2ne
   "@typescript-eslint/parser": 5.48.0_iukboom6ndih5an6iafl45j2fe
+  dotenv-vault-core: 0.6.1
   firebase: 9.15.0
   postcss: 8.4.21
   react: 18.2.0
@@ -2188,18 +2190,20 @@ packages:
       wrap-ansi: 7.0.0
     dev: false
 
-  /clsx/1.2.1:
-    resolution:
-      {
-        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
-      }
-    engines: { node: ">=6" }
   /clone/2.1.2:
     resolution:
       {
         integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==,
       }
     engines: { node: ">=0.8" }
+    dev: true
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: ">=6" }
     dev: true
 
   /collection-visit/1.0.0:
@@ -2612,6 +2616,24 @@ packages:
       domelementtype: 2.3.0
       domhandler: 4.3.1
     dev: true
+
+  /dotenv-vault-core/0.6.1:
+    resolution:
+      {
+        integrity: sha512-BLyzb+Y/ai4py2SF7nnfPF2nb+8QygTIVJxFvn6DyfCoajUfIjOQF3+FxQ2eF3s84kHJa8wSaPKoxIT3Vg4DHQ==,
+      }
+    engines: { node: ">=12" }
+    dependencies:
+      dotenv: 16.0.3
+    dev: false
+
+  /dotenv/16.0.3:
+    resolution:
+      {
+        integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==,
+      }
+    engines: { node: ">=12" }
+    dev: false
 
   /eastasianwidth/0.2.0:
     resolution:
