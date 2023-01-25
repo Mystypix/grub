@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+}
+
+.or {
+  position: relative;
+  margin: var(--spacing-4) 0;
+  text-transform: uppercase;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 1px;
+    background: gray;
+  }
+
+  &::before {
+    left: calc(100% + var(--spacing-3));
+  }
+
+  &::after {
+    right: calc(100% + var(--spacing-3));
+  }
+}
