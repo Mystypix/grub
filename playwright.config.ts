@@ -6,7 +6,6 @@ import dotenv from "dotenv-vault-core";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
 dotenv.config();
 
 /**
