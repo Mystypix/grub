@@ -8,6 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,16 +19,10 @@ jobs:
         uses: pnpm/action-setup@v2.2.4
       - name: Install dependencies
         run: pnpm install
-        env:
-          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
-        env:
-          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - name: Run Playwright tests
         run: pnpm dlx playwright test
-        env:
-          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
