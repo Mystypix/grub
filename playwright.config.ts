@@ -7,8 +7,6 @@ import dotenv from "dotenv-vault-core";
  * https://github.com/motdotla/dotenv
  */
 dotenv.config();
-console.log("VOLA SE TO VUBEC");
-console.log(process.env); // remove this after you've confirmed it is working
 
 /**
  * See https://playwright.dev/docs/test-configuration.
