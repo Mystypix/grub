@@ -9,11 +9,6 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: dopplerhq/cli-action@v2
-      - name: Setup dopler
-        run: doppler secrets --only-names
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -24,8 +19,13 @@ jobs:
         run: pnpm install
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
+      - uses: dopplerhq/cli-action@v2
+      - name: Setup dopler
+        run: doppler secrets --only-names
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - name: Run Playwright tests
-        run: doppler --version && pnpm dlx playwright test
+        run: doppler run -- pnpm dlx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
