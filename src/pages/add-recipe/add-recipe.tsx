@@ -21,7 +21,13 @@ export const AddRecipe = () => {
   return (
     <div>
       <form>
-        <Input label="Name" name="name" onChange={setName} value={name} />
+        <Input
+          label="Name of the recipe"
+          name="recipeName"
+          onChange={setName}
+          type="text"
+          value={name}
+        />
         {mutation.isError && <p>{mutation.error.message}</p>}
         <button disabled={mutation.isLoading} onClick={handleSave}>
           Save

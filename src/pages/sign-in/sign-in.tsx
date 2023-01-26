@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
 import { auth } from "../../firebase/firebase";
+import { Input } from "../../components/input/input";
 import { Button } from "../../components/button/button";
 import css from "./sign-in.module.scss";
 
@@ -25,20 +26,31 @@ export const SignIn = () => {
     }
   };
 
+  const setEmailHandler = (value: string) => {
+    setEmail(value);
+  };
+  const setPasswordHandler = (value: string) => {
+    setPassword(value);
+  };
+
   return (
     <div className={css.wrapper}>
       <h1>Sign in</h1>
-      <input
-        style={{ border: "1px solid gray" }}
-        type="email"
+      <Input
+        label="Enter your email"
+        name="Email"
+        onChange={setEmailHandler}
         placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        type="email"
+        value={email}
       />
-      <input
-        style={{ border: "1px solid gray" }}
-        type="password"
+      <Input
+        label="Your secret password"
+        name="Password"
+        onChange={setPasswordHandler}
         placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
+        type="password"
+        value={password}
       />
       <Button
         disabled={mutation.isLoading}

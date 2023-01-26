@@ -2,6 +2,7 @@ import { useAuthCreateUserWithEmailAndPassword } from "@react-query-firebase/aut
 import { auth } from "../../firebase/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Input } from "../../components/input/input";
 import { Button } from "../../components/button/button";
 import css from "./sign-up.module.scss";
 import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
@@ -25,21 +26,32 @@ export const SignUp = () => {
     }
   };
 
+  const setEmailHandler = (value: string) => {
+    setEmail(value);
+  };
+  const setPasswordHandler = (value: string) => {
+    setPassword(value);
+  };
+
   return (
     <div className={css.wrapper}>
       <h1>Sign up</h1>
       <form>
-        <input
-          style={{ border: "1px solid gray" }}
-          type="email"
+        <Input
+          label="Enter your email"
+          name="Email"
+          onChange={setEmailHandler}
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          value={email}
         />
-        <input
-          style={{ border: "1px solid gray" }}
-          type="password"
+        <Input
+          label="Your secrete password"
+          name="Password"
+          onChange={setPasswordHandler}
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          value={password}
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
         <Button
