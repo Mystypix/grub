@@ -8,12 +8,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
     steps:
-      - uses: dopplerhq/cli-action@v2
-      - name: Setup dopler
-        run: doppler secrets --only-names
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
