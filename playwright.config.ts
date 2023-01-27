@@ -100,7 +100,7 @@ const config: PlaywrightTestConfig = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "doppler --version && doppler run --command='pnpm vite'",
+    command: "pnpm vite",
     port: 5173,
   },
 };
