@@ -9,6 +9,7 @@ import css from "./account-box.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuthSignOut } from "@react-query-firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { ModeSwitch } from "../mode-switch/mode-switch";
 
 export const AcccountBox = () => {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,7 @@ export const AcccountBox = () => {
       </div>
       {open && (
         <div className={css.menu}>
+          <ModeSwitch />
           <div className={css.menuItem}>
             <Icon className={css.icon} src={SettingsIcon} />
             Settings

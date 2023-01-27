@@ -12,7 +12,7 @@ export const MyRecipes = () => {
     where("userId", "==", `${user.data?.uid}`)
   );
 
-  const result = useFirestoreQuery(["products"], ref);
+  const result = useFirestoreQuery(["recipes"], ref);
 
   if (result.isLoading) {
     return <div>Loading...</div>;
