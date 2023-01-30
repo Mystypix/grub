@@ -8,6 +8,7 @@ import { Layout } from "../components/layout/layout";
 import { PublicRoutes } from "./public-routes";
 import { AddRecipe } from "../pages/add-recipe/add-recipe";
 import { MyRecipes } from "../pages/my-recipes/my-recipes";
+import { Settings } from "../pages/settings/settings";
 
 export const Router = () => {
   return (
@@ -15,9 +16,10 @@ export const Router = () => {
       <Layout>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<AddRecipe />} path="/add-recipe" />
+            <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<MyRecipes />} path="/my-recipes" />
+            <Route element={<Settings />} path="/settings" />
           </Route>
           <Route element={<PublicRoutes />}>
             <Route element={<Intro />} path="/" />

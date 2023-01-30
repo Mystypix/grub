@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Avatar } from "../avatar/avatar";
 import clsx from "clsx";
 import css from "./account-box.module.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthSignOut } from "@react-query-firebase/auth";
 import { auth } from "../../firebase/firebase";
 
@@ -34,10 +34,12 @@ export const AcccountBox = () => {
       </div>
       {open && (
         <div className={css.menu}>
-          <div className={css.menuItem}>
-            <Icon className={css.icon} src={SettingsIcon} />
-            Settings
-          </div>
+          <Link to="/settings">
+            <div className={css.menuItem}>
+              <Icon className={css.icon} src={SettingsIcon} />
+              Settings
+            </div>
+          </Link>
           <div onClick={handleLogout} className={css.menuItem}>
             <Icon className={css.icon} src={LogoutIcon} />
             Logout
