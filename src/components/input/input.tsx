@@ -2,7 +2,7 @@ import React from "react";
 import css from "./input.module.scss";
 
 interface InputProps {
-  label?: string;
+  label?: React.ReactNode;
   name: string;
   onChange: (s: string) => void; // will setState for a form everytime input is changed
   placeholder: string; // hint for a user

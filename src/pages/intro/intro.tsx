@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { MainTitle } from "../../components/typography/typography";
-import { Button } from "../../components/button/button";
+import { MainTitle } from "components/typography/typography";
+import { Button } from "components/button/button";
 import css from "./intro.module.scss";
 
 export const Intro = () => {

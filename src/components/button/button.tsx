@@ -1,7 +1,7 @@
 import css from "./button.module.scss";
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   disabled?: boolean;
   name: string;
   onClick: () => void;

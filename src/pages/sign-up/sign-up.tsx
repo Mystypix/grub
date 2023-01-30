@@ -2,10 +2,12 @@ import { useAuthCreateUserWithEmailAndPassword } from "@react-query-firebase/aut
 import { auth } from "../../firebase/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Input } from "../../components/input/input";
-import { Button } from "../../components/button/button";
+import { Input } from "components/input/input";
+import { Button } from "components/button/button";
 import css from "./sign-up.module.scss";
-import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
+import { GoogleAuthButton } from "components/google-auth-button/google-auth-button";
+import { LocalisedText } from "components/localisedText";
+import { TextKey } from "common/const/localisation/text-keys";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -35,21 +37,21 @@ export const SignUp = () => {
 
   return (
     <div className={css.wrapper}>
-      <h1>Sign up</h1>
+      <h1>
+        <LocalisedText textKey={TextKey.SignUp} />
+      </h1>
       <form>
         <Input
-          label="Enter your email"
-          name="Email"
+          label={<LocalisedText textKey={TextKey.Email} />}
+          name="email"
           onChange={setEmailHandler}
-          placeholder="Email"
           type="email"
           value={email}
         />
         <Input
-          label="Your secrete password"
+          label={<LocalisedText textKey={TextKey.Password} />}
           name="Password"
           onChange={setPasswordHandler}
-          placeholder="Password"
           type="password"
           value={password}
         />
@@ -61,18 +63,22 @@ export const SignUp = () => {
           type="submit"
           variant="primary"
         >
-          Sign up
+          <LocalisedText textKey={TextKey.SignUp} />
         </Button>
       </form>
       <div>---OR---</div>
       <GoogleAuthButton
         disabled={mutation.isLoading}
-        text="Sign up with Google"
+        text={<LocalisedText textKey={TextKey.GoogleSignUp} />}
       />
       <div>-------------------</div>
       <div>
-        <div>Already have an account?</div>
-        <Link to="/sign-in">Sign in</Link>
+        <div>
+          <LocalisedText textKey={TextKey.AlreadyHaveAnAccount} />
+        </div>
+        <Link to="/sign-in">
+          <LocalisedText textKey={TextKey.SignIn} />
+        </Link>
       </div>
     </div>
   );

@@ -17,7 +17,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "common/*": ["common/*"]
+      "assets/*": ["src/assets/*"],
+      "common/*": ["common/*"],
+      "components/*": ["src/components/*"],
+      "src/*": ["src/*"]
     }
   },
   "include": ["src", "common/const"],

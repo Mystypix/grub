@@ -2,7 +2,7 @@ import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore"
 import { collection } from "firebase/firestore";
 import { useState } from "react";
 import { auth, firestore } from "../../firebase/firebase";
-import { Input } from "../../components/input/input";
+import { Input } from "components/input/input";
 import { useAuthUser } from "@react-query-firebase/auth";
 
 export const AddRecipe = () => {
