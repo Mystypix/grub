@@ -1,11 +1,6 @@
 .wrapper {
   position: relative;
-}
-
-.logout {
-  position: absolute;
-  right: 10px;
-  padding: 5px 10px;
-  background: pink;
-  cursor: pointer;
+  padding: 78px var(--spacing-4);
+  min-height: 100vh;
+  background: var(--color-main-bg);
 }
