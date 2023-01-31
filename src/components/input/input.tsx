@@ -1,26 +1,30 @@
 import React from "react";
+import clsx from "clsx";
 import css from "./input.module.scss";
 
 interface InputProps {
+  disabled?: boolean;
   label?: React.ReactNode;
   name: string;
-  onChange: (s: string) => void; // will setState for a form everytime input is changed
-  placeholder: string; // hint for a user
-  type: string;
+  onChange?: (s: React.ChangeEvent<HTMLInputElement>) => void; // will setState for a form everytime input is changed
+  placeholder?: string; // hint for a user
+  type?: string;
   value: string;
 }
 
 export const Input = ({
+  disabled,
   label,
   name,
   onChange,
   placeholder,
-  type,
+  type = "text",
   value,
 }: InputProps) => {
   function onChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    onChange(event.currentTarget.value);
+    onChange && onChange(event);
   }
+
   return (
     <div className={css.wrapper}>
       {label && (
@@ -29,7 +33,8 @@ export const Input = ({
         </label>
       )}
       <input
-        className={css.input}
+        className={clsx(css.input, { [css.disabled]: disabled })}
+        disabled={disabled}
         id={name}
         name={name}
         onChange={onChangeHandler}

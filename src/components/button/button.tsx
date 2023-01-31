@@ -1,31 +1,34 @@
+import clsx from "clsx";
 import css from "./button.module.scss";
 
 interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
-  name: string;
   onClick: () => void;
   type: "submit" | "reset" | "button" | undefined;
-  variant: string;
+  variant: "primary" | "secondary" | "general";
 }
 
 export const Button = ({
   children,
   disabled,
-  name,
   onClick,
   type,
   variant,
 }: ButtonProps) => {
   return (
     <button
-      className={css.btn + " " + css[variant]}
+      className={clsx(css.btn, css[variant])}
       disabled={disabled}
-      name={name}
       onClick={onClick}
       type={type}
     >
       {children}
     </button>
   );
+};
+
+Button.defaultProps = {
+  type: "submit",
+  variant: "general",
 };
