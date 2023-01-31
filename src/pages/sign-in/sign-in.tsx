@@ -28,11 +28,11 @@ export const SignIn = () => {
     }
   };
 
-  const setEmailHandler = (value: string) => {
-    setEmail(value);
+  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
-  const setPasswordHandler = (value: string) => {
-    setPassword(value);
+  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   return (
