@@ -1,4 +1,5 @@
 :root {
+  --color-main-bg: #eee;
   --input-border-color: #191738;
   --main-title-font-size: 30px;
   --sub-title-font-size: 24px;
@@ -18,6 +19,10 @@
 
   font-family: Raleway, sans-serif;
   line-height: 1.5;
+}
+
+[data-theme="dark"] {
+  --color-main-bg: #111;
 }
 
 * {
