@@ -4,7 +4,7 @@ import css from "./input.module.scss";
 
 interface InputProps {
   disabled?: boolean;
-  label?: string;
+  label?: React.ReactNode;
   name: string;
   onChange?: (s: React.ChangeEvent<HTMLInputElement>) => void; // will setState for a form everytime input is changed
   placeholder?: string; // hint for a user

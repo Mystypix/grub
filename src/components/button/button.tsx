@@ -2,7 +2,7 @@ import clsx from "clsx";
 import css from "./button.module.scss";
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   disabled?: boolean;
   onClick: () => void;
   type: "submit" | "reset" | "button" | undefined;

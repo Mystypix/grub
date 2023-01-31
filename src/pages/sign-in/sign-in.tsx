@@ -1,10 +1,12 @@
 import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleAuthButton } from "../../components/google-auth-button/google-auth-button";
 import { auth } from "../../firebase/firebase";
-import { Input } from "../../components/input/input";
-import { Button } from "../../components/button/button";
+import { GoogleAuthButton } from "components/google-auth-button/google-auth-button";
+import { Input } from "components/input/input";
+import { Button } from "components/button/button";
+import { LocalisedText } from "components/localisedText";
+import { TextKey } from "common/const/localisation/text-keys";
 import css from "./sign-in.module.scss";
 
 export const SignIn = () => {
@@ -35,20 +37,20 @@ export const SignIn = () => {
 
   return (
     <div className={css.wrapper}>
-      <h1>Sign in</h1>
+      <h1>
+        <LocalisedText textKey={TextKey.SignIn} />
+      </h1>
       <Input
-        label="Enter your email"
-        name="Email"
+        label={<LocalisedText textKey={TextKey.Email} />}
+        name="email"
         onChange={setEmailHandler}
-        placeholder="Email"
         type="email"
         value={email}
       />
       <Input
-        label="Your secret password"
-        name="Password"
+        label={<LocalisedText textKey={TextKey.Password} />}
+        name="password"
         onChange={setPasswordHandler}
-        placeholder="Password"
         type="password"
         value={password}
       />
@@ -59,18 +61,22 @@ export const SignIn = () => {
         type="submit"
         variant="primary"
       >
-        Sign in
+        <LocalisedText textKey={TextKey.SignIn} />
       </Button>
 
       <div>---OR---</div>
       <GoogleAuthButton
         disabled={mutation.isLoading}
-        text="Sign up with Google"
+        text={<LocalisedText textKey={TextKey.GoogleSignUp} />}
       />
       <div>-------------------</div>
       <div>
-        <div>Not having an account yet?</div>
-        <Link to="/sign-up">Sign up</Link>
+        <div>
+          <LocalisedText textKey={TextKey.NoAccountYet} />
+        </div>
+        <Link to="/sign-up">
+          <LocalisedText textKey={TextKey.SignUp} />
+        </Link>
       </div>
     </div>
   );

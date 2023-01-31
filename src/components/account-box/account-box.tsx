@@ -1,7 +1,7 @@
 import { Icon } from "../icon";
-import ArrowIcon from "../../assets/svg/arrow-down.svg";
-import LogoutIcon from "../../assets/svg/logout.svg";
-import SettingsIcon from "../../assets/svg/setting-2.svg";
+import ArrowIcon from "assets/svg/arrow-down.svg";
+import LogoutIcon from "assets/svg/logout.svg";
+import SettingsIcon from "assets/svg/setting-2.svg";
 import { useState } from "react";
 import { Avatar } from "../avatar/avatar";
 import clsx from "clsx";
