@@ -1,13 +1,16 @@
 .mainTitle {
+  margin-bottom: var(--spacing-4);
   font-size: var(--main-title-font-size);
   font-weight: 200;
 }
 
 .subTitle {
+  margin-bottom: var(--spacing-3);
   font-size: var(--sub-title-font-size);
 }
 
 .contentTitle {
+  margin-bottom: var(--spacing-3);
   font-size: var(--content-title-font-size);
 }
 

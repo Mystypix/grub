@@ -1,5 +1,5 @@
 import { useAuthSignInWithEmailAndPassword } from "@react-query-firebase/auth";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { GoogleAuthButton } from "components/google-auth-button/google-auth-button";
@@ -8,11 +8,16 @@ import { Button } from "components/button/button";
 import { LocalisedText } from "components/localisedText";
 import { TextKey } from "common/const/localisation/text-keys";
 import css from "./sign-in.module.scss";
+import { MainTitle } from "components/typography/typography";
+import { EMAIL_REGEX } from "src/const/validations";
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const mutation = useAuthSignInWithEmailAndPassword(auth, {
     onError(error) {
@@ -20,7 +25,8 @@ export const SignIn = () => {
     },
   });
 
-  const handleSignIn = () => {
+  const onSubmit = (data) => {
+    const { email, password } = data;
     mutation.mutate({ email, password });
 
     if (mutation.isSuccess) {
@@ -28,41 +34,41 @@ export const SignIn = () => {
     }
   };
 
-  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <div className={css.wrapper}>
-      <h1>
+      <MainTitle>
         <LocalisedText textKey={TextKey.SignIn} />
-      </h1>
-      <Input
-        label={<LocalisedText textKey={TextKey.Email} />}
-        name="email"
-        onChange={setEmailHandler}
-        type="email"
-        value={email}
-      />
-      <Input
-        label={<LocalisedText textKey={TextKey.Password} />}
-        name="password"
-        onChange={setPasswordHandler}
-        type="password"
-        value={password}
-      />
-      <Button
-        disabled={mutation.isLoading}
-        name="sign-in"
-        onClick={handleSignIn}
-        type="submit"
-        variant="primary"
-      >
-        <LocalisedText textKey={TextKey.SignIn} />
-      </Button>
+      </MainTitle>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label={<LocalisedText textKey={TextKey.Email} />}
+          name="email"
+          register={register}
+          validation={{ pattern: EMAIL_REGEX }}
+        />
+        {errors.email?.type === "pattern" && (
+          <div>Email is in wrong format</div>
+        )}
+        {errors.email?.type === "required" && <div>Email is required</div>}
+        <Input
+          label={<LocalisedText textKey={TextKey.Password} />}
+          name="password"
+          type="password"
+          register={register}
+          validation={{ minLength: "8", required: true }}
+        />
+        {errors.password?.type === "minLength" && (
+          <div>
+            Password is too short - It should be at least 8 characters long
+          </div>
+        )}
+        {errors.password?.type === "required" && (
+          <div>Password is required</div>
+        )}
+        <Button disabled={mutation.isLoading} type="submit" variant="primary">
+          <LocalisedText textKey={TextKey.SignIn} />
+        </Button>
+      </form>
 
       <div>---OR---</div>
       <GoogleAuthButton

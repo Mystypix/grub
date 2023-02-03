@@ -4,7 +4,7 @@ import css from "./button.module.scss";
 interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   type: "submit" | "reset" | "button" | undefined;
   variant: "primary" | "secondary" | "general";
 }

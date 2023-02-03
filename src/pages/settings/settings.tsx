@@ -1,5 +1,5 @@
 import { useAuthUser } from "@react-query-firebase/auth";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { auth, firestore } from "../../firebase/firebase";
 import { Input } from "../../components/input/input";
 import { collection, doc } from "firebase/firestore";
@@ -17,43 +17,35 @@ export const Settings = () => {
   const userSettingsRef = doc(userSettingsCollectionRef, user.data?.uid);
   const userSettings = useFirestoreDocumentData(
     ["user-settings", user.data?.uid],
-    userSettingsRef
+    userSettingsRef,
+    {
+      subscribe: true,
+    }
   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: userSettings.data?.firstName || "",
+      lastName: userSettings.data?.lastName || "",
+      displayName:
+        userSettings.data?.displayName || user.data?.displayName || "",
+    },
+  });
 
   const mutation = useFirestoreDocumentMutation(userSettingsRef, {
     merge: true,
   });
 
-  const [formData, setFormData] = useState({
-    email: user.data?.email || "",
-    firstName: "",
-    lastName: "",
-    displayName: user.data?.displayName || "",
-    password: "",
-  });
+  const onSubmit = (data) => {
+    const { firstName, lastName, displayName } = data;
 
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      firstName: userSettings.data?.firstName || "",
-      lastName: userSettings.data?.lastName || "",
-      displayName:
-        userSettings.data?.displayName || user.data?.displayName || "",
-    });
-  }, [userSettings.isLoading]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = () => {
     mutation.mutate({
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      displayName: formData.displayName,
+      firstName,
+      lastName,
+      displayName,
     });
   };
 
@@ -63,34 +55,20 @@ export const Settings = () => {
 
   return (
     <div className={css.wrapper}>
-      <Input label="Email" name="email" value={formData.email} disabled />
-      <Input
-        label="First name"
-        name="firstName"
-        onChange={handleChange}
-        value={formData.firstName}
-      />
-      <Input
-        label="Last name"
-        name="lastName"
-        onChange={handleChange}
-        value={formData.lastName}
-      />
-      <Input
-        label="Display name"
-        name="displayName"
-        onChange={handleChange}
-        value={formData.displayName}
-      />
-      <Input
-        label="Password"
-        type="password"
-        name="password"
-        onChange={handleChange}
-        value={formData.password}
-        placeholder="********"
-      />
-      <Button onClick={handleSubmit}>Save</Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input label="Email" name={"email"} register={register} disabled />
+        <Input label="First name" name="firstName" register={register} />
+        <Input label="Last name" name="lastName" register={register} />
+        <Input label="Display name" name="displayName" register={register} />
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          register={register}
+          placeholder="********"
+        />
+        <Button type="submit">Save</Button>
+      </form>
     </div>
   );
 };

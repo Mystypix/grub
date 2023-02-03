@@ -6,7 +6,7 @@ import { auth } from "../../firebase/firebase";
 
 interface GoogleAuthButtonProps {
   disabled?: boolean;
-  text: string;
+  text: React.ReactNode;
 }
 
 export const GoogleAuthButton = ({ disabled, text }: GoogleAuthButtonProps) => {

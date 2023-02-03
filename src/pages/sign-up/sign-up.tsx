@@ -1,6 +1,6 @@
 import { useAuthCreateUserWithEmailAndPassword } from "@react-query-firebase/auth";
 import { auth } from "../../firebase/firebase";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "components/input/input";
 import { Button } from "components/button/button";
@@ -8,11 +8,15 @@ import css from "./sign-up.module.scss";
 import { GoogleAuthButton } from "components/google-auth-button/google-auth-button";
 import { LocalisedText } from "components/localisedText";
 import { TextKey } from "common/const/localisation/text-keys";
+import { MainTitle } from "components/typography/typography";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const mutation = useAuthCreateUserWithEmailAndPassword(auth, {
     onError(error) {
@@ -20,7 +24,8 @@ export const SignUp = () => {
     },
   });
 
-  const handleSignUp = () => {
+  const onSubmit = (data) => {
+    const { email, password } = data;
     mutation.mutate({ email, password });
 
     if (mutation.isSuccess) {
@@ -28,41 +33,25 @@ export const SignUp = () => {
     }
   };
 
-  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const setPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <div className={css.wrapper}>
-      <h1>
+      <MainTitle>
         <LocalisedText textKey={TextKey.SignUp} />
-      </h1>
-      <form>
+      </MainTitle>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label={<LocalisedText textKey={TextKey.Email} />}
           name="email"
-          onChange={setEmailHandler}
-          type="email"
-          value={email}
+          register={register}
         />
         <Input
           label={<LocalisedText textKey={TextKey.Password} />}
           name="Password"
-          onChange={setPasswordHandler}
+          register={register}
           type="password"
-          value={password}
         />
         {mutation.isError && <div>{mutation.error.message}</div>}
-        <Button
-          disabled={mutation.isLoading}
-          name="sign-in"
-          onClick={handleSignUp}
-          type="submit"
-          variant="primary"
-        >
+        <Button disabled={mutation.isLoading} type="submit" variant="primary">
           <LocalisedText textKey={TextKey.SignUp} />
         </Button>
       </form>
