@@ -13,6 +13,5 @@ export const TextKey = {
     RecipeName: 'Recipe name',
     DurationCooking: 'Cooking duration',
     DurationPreparation: 'Preparation duration',
-
     Save: 'Save',
 }

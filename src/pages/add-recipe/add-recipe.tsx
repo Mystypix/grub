@@ -10,16 +10,19 @@ import { useAuthUser } from '@react-query-firebase/auth'
 import { toast } from 'react-toastify'
 import { TextKey } from 'common/const/localisation/text-keys'
 import { LocalisedText } from 'components/localisedText'
+import { IngredientItem } from 'components/ingredient-item/ingredient-item'
 
 export const AddRecipe = () => {
-    const navigate = useNavigate()
+    const [sections, setSections] = useState([
+        [{ ingredientName: '', amount: '', unit: '' }],
+    ]) // you can have more sections. Every section consists of multiple ingredients. F.e. chococalate cake toping - cream, sugar, etc. Every ingredient will be an object
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
 
-    const [name, setName] = useState('')
     const user = useAuthUser(['user'], auth)
     const ref = collection(firestore, 'recipes')
 
@@ -40,8 +43,13 @@ export const AddRecipe = () => {
         // }
     }
 
-    const handleInputChange = (e) => {
-        setName(e.target.value)
+    const handleAddSection = () => {
+        setSections((prevValue) => {
+            return [
+                ...prevValue,
+                [{ ingredientName: '', amount: '', unit: '' }],
+            ]
+        })
     }
 
     return (
@@ -80,6 +88,47 @@ export const AddRecipe = () => {
                         value={name}
                     />
                 </div>
+
+                {sections.map((sectionIngredients, sectionIndex) => {
+                    return (
+                        <div key={sectionIndex}>
+                            <p>Igredients section: {sectionIndex}</p>
+                            {sectionIngredients.map(
+                                (ingredient, ingredientIndex, ingredients) => {
+                                    return (
+                                        <IngredientItem
+                                            amount={ingredient.amount}
+                                            keyIngredient={`section-${sectionIndex}-${ingredientIndex}`}
+                                            name={ingredient.name}
+                                            register={register}
+                                            unit={ingredient.unit}
+                                        />
+                                    )
+                                }
+                            )}
+                        </div>
+                    )
+                })}
+
+                <Button
+                    type="button"
+                    disabled={mutation.isLoading}
+                    onClick={handleAddSection}
+                >
+                    {/* <LocalisedText textKey={TextKey.Save} /> */}
+                    Přidat sekci
+                </Button>
+
+                <Button
+                    type="button"
+                    disabled={mutation.isLoading}
+                    onClick={() => {
+                        console.log(sections)
+                    }}
+                >
+                    {/* <LocalisedText textKey={TextKey.Save} /> */}
+                    Zobraz sekce
+                </Button>
 
                 {errors.recipeName?.type === 'required' && (
                     <div>Recipe name is required</div>
