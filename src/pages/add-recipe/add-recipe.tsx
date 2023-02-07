@@ -89,15 +89,52 @@ export const AddRecipe = () => {
                     register={register}
                     validation={{ required: true }}
                 />
-                {sections.fields.map((field, index) => {
+                {sections.fields.map((field, index, sections) => {
+                    const ingredients = useFieldArray({
+                        control,
+                        name: `ingr-${field.id}`,
+                    })
+
                     return (
                         <div key={`section-${field.id}-${index}`}>
                             <h3>Sekce</h3>
                             <p>Description</p>
                             <ul>
-                                {/* TODO adding array field inside of any array field is not possible right now */}
-                                {/* <IngredientItem register={register} sectionId={field.id}/> */}
+                                {ingredients.fields.map(
+                                    (ingredientField, ingredientIndex) => {
+                                        return (
+                                            <li>
+                                                <Button
+                                                    type="button"
+                                                    disabled={
+                                                        mutation.isLoading
+                                                    }
+                                                    onClick={() => {
+                                                        ingredients.remove(
+                                                            index
+                                                        )
+                                                    }}
+                                                >
+                                                    X
+                                                </Button>
+                                            </li>
+                                        )
+                                    }
+                                )}
                             </ul>
+                            <Button
+                                type="button"
+                                disabled={mutation.isLoading}
+                                onClick={() => {
+                                    ingredients.append({
+                                        ingredientName: '',
+                                        amount: 0,
+                                        unit: 'kg',
+                                    })
+                                }}
+                            >
+                                Add ingred
+                            </Button>
                         </div>
                     )
                 })}
