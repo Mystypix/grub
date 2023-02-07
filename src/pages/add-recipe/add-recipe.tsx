@@ -2,7 +2,7 @@ import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
 import { collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { auth, firestore } from '../../firebase/firebase'
 import { Input } from 'components/input/input'
 import { Button } from 'components/button/button'
@@ -13,15 +13,22 @@ import { LocalisedText } from 'components/localisedText'
 import { IngredientItem } from 'components/ingredient-item/ingredient-item'
 
 export const AddRecipe = () => {
-    const [sections, setSections] = useState([
-        [{ ingredientName: '', amount: '', unit: '' }],
-    ]) // you can have more sections. Every section consists of multiple ingredients. F.e. chococalate cake toping - cream, sugar, etc. Every ingredient will be an object
-
+    // const [sections, setSections] = useState([
+    //     [{ ingredientName: '', amount: '', unit: '' }],
+    // ]) // you can have more sections. Every section consists of multiple ingredients. F.e. chococalate cake toping - cream, sugar, etc. Every ingredient will be an object
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
-    } = useForm()
+    } = useForm({
+        defaultValues: {
+            ingredients: [{ ingredientName: '', amount: 0, unit: 'kg' }],
+            sections: [{ name: '', description: '' }],
+        },
+    })
+
+    const sections = useFieldArray({ control, name: 'sections' })
 
     const user = useAuthUser(['user'], auth)
     const ref = collection(firestore, 'recipes')
@@ -43,69 +50,54 @@ export const AddRecipe = () => {
         // }
     }
 
-    const handleAddSection = () => {
-        setSections((prevValue) => {
-            return [
-                ...prevValue,
-                [{ ingredientName: '', amount: '', unit: '' }],
-            ]
-        })
-    }
+    // const handleAddSection = () => {
+    //     setSections((prevValue) => {
+    //         return [
+    //             ...prevValue,
+    //             [{ ingredientName: '', amount: '', unit: '' }],
+    //         ]
+    //     })
+    // }
 
+    // INFO you can simply use <> to replace React.Fragment
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     label={<LocalisedText textKey={TextKey.RecipeName} />}
                     name="recipeName"
-                    type="recipeName"
                     register={register}
                     validation={{ required: true }}
-                    value={name}
+                />
+                <Input
+                    label={
+                        <LocalisedText textKey={TextKey.DurationPreparation} />
+                    }
+                    name="durationPreparation"
+                    register={register}
+                />
+                <Input
+                    label={<LocalisedText textKey={TextKey.DurationCooking} />}
+                    name="durationCooking"
+                    register={register}
+                    validation={{ required: true }}
                 />
 
-                <div>
-                    <Input
-                        label={
-                            <LocalisedText
-                                textKey={TextKey.DurationPreparation}
-                            />
-                        }
-                        name="durationPreparation"
-                        type="durationPreparation"
-                        register={register}
-                        // validation={{ required: true }}
-                        value={name}
-                    />
-                    <Input
-                        label={
-                            <LocalisedText textKey={TextKey.DurationCooking} />
-                        }
-                        name="durationCooking"
-                        type="durationCooking"
-                        register={register}
-                        // validation={{ required: true }}
-                        value={name}
-                    />
-                </div>
-
-                {sections.map((sectionIngredients, sectionIndex) => {
+                <Input
+                    label={<LocalisedText textKey={TextKey.DurationCooking} />}
+                    name="durationCooking"
+                    register={register}
+                    validation={{ required: true }}
+                />
+                {sections.fields.map((field, index) => {
                     return (
-                        <div key={sectionIndex}>
-                            <p>Igredients section: {sectionIndex}</p>
-                            {sectionIngredients.map(
-                                (ingredient, ingredientIndex, ingredients) => {
-                                    return (
-                                        <IngredientItem
-                                            amount={ingredient.amount}
-                                            keyIngredient={`section-${sectionIndex}-${ingredientIndex}`}
-                                            name={ingredient.name}
-                                            register={register}
-                                            unit={ingredient.unit}
-                                        />
-                                    )
-                                }
-                            )}
+                        <div key={`section-${field.id}-${index}`}>
+                            <h3>Sekce</h3>
+                            <p>Description</p>
+                            <ul>
+                                {/* TODO adding array field inside of any array field is not possible right now */}
+                                {/* <IngredientItem register={register} sectionId={field.id}/> */}
+                            </ul>
                         </div>
                     )
                 })}
@@ -113,30 +105,16 @@ export const AddRecipe = () => {
                 <Button
                     type="button"
                     disabled={mutation.isLoading}
-                    onClick={handleAddSection}
-                >
-                    {/* <LocalisedText textKey={TextKey.Save} /> */}
-                    Přidat sekci
-                </Button>
-
-                <Button
-                    type="button"
-                    disabled={mutation.isLoading}
                     onClick={() => {
-                        console.log(sections)
+                        sections.append({ name: '', description: '' })
                     }}
                 >
-                    {/* <LocalisedText textKey={TextKey.Save} /> */}
-                    Zobraz sekce
+                    Add section
                 </Button>
 
-                {errors.recipeName?.type === 'required' && (
-                    <div>Recipe name is required</div>
-                )}
-                {/* TODO localised */}
-
-                <Button disabled={mutation.isLoading}>
-                    <LocalisedText textKey={TextKey.Save} />
+                <Button type="submit" disabled={mutation.isLoading}>
+                    {/* <LocalisedText textKey={TextKey.Save} /> */}
+                    Save
                 </Button>
             </form>
         </div>
