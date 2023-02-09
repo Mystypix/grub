@@ -70,7 +70,13 @@ export const AddRecipe = () => {
                         <div key={`${field.id}`}>
                             <h3>Sekce</h3>
                             <p>Description</p>
-                            <ul></ul>
+
+                            <IngredientItem
+                                sectionIndex={index}
+                                register={register}
+                                control={control}
+                            />
+
                             <Button
                                 type="button"
                                 disabled={mutation.isLoading}
