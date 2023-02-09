@@ -23,8 +23,7 @@ export const AddRecipe = () => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            ingredients: [{ ingredientName: '', amount: 0, unit: 'kg' }],
-            sections: [{ name: '', description: '' }],
+            sections: [{ name: '', description: '', ingredients: [] }],
         },
     })
 
@@ -42,24 +41,7 @@ export const AddRecipe = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        // const { email, password } = data; // TODO RECIPE DATA
-        // mutation.mutate({ email, password });
-
-        // if (mutation.isSuccess) { // TODO
-        //     navigate("/dashboard");
-        // }
     }
-
-    // const handleAddSection = () => {
-    //     setSections((prevValue) => {
-    //         return [
-    //             ...prevValue,
-    //             [{ ingredientName: '', amount: '', unit: '' }],
-    //         ]
-    //     })
-    // }
-
-    // INFO you can simply use <> to replace React.Fragment
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -83,57 +65,20 @@ export const AddRecipe = () => {
                     validation={{ required: true }}
                 />
 
-                <Input
-                    label={<LocalisedText textKey={TextKey.DurationCooking} />}
-                    name="durationCooking"
-                    register={register}
-                    validation={{ required: true }}
-                />
-                {sections.fields.map((field, index, sections) => {
-                    const ingredients = useFieldArray({
-                        control,
-                        name: `ingr-${field.id}`,
-                    })
-
+                {sections.fields.map((field, index) => {
                     return (
-                        <div key={`section-${field.id}-${index}`}>
+                        <div key={`${field.id}`}>
                             <h3>Sekce</h3>
                             <p>Description</p>
-                            <ul>
-                                {ingredients.fields.map(
-                                    (ingredientField, ingredientIndex) => {
-                                        return (
-                                            <li>
-                                                <Button
-                                                    type="button"
-                                                    disabled={
-                                                        mutation.isLoading
-                                                    }
-                                                    onClick={() => {
-                                                        ingredients.remove(
-                                                            index
-                                                        )
-                                                    }}
-                                                >
-                                                    X
-                                                </Button>
-                                            </li>
-                                        )
-                                    }
-                                )}
-                            </ul>
+                            <ul></ul>
                             <Button
                                 type="button"
                                 disabled={mutation.isLoading}
                                 onClick={() => {
-                                    ingredients.append({
-                                        ingredientName: '',
-                                        amount: 0,
-                                        unit: 'kg',
-                                    })
+                                    sections.remove(index)
                                 }}
                             >
-                                Add ingred
+                                Delete section
                             </Button>
                         </div>
                     )
@@ -143,7 +88,11 @@ export const AddRecipe = () => {
                     type="button"
                     disabled={mutation.isLoading}
                     onClick={() => {
-                        sections.append({ name: '', description: '' })
+                        sections.append({
+                            name: '',
+                            description: '',
+                            ingredients: [],
+                        })
                     }}
                 >
                     Add section
