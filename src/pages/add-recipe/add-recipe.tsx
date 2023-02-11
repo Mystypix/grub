@@ -13,9 +13,6 @@ import { LocalisedText } from 'components/localisedText'
 import { IngredientItem } from 'components/ingredient-item/ingredient-item'
 
 export const AddRecipe = () => {
-    // const [sections, setSections] = useState([
-    //     [{ ingredientName: '', amount: '', unit: '' }],
-    // ]) // you can have more sections. Every section consists of multiple ingredients. F.e. chococalate cake toping - cream, sugar, etc. Every ingredient will be an object
     const {
         register,
         handleSubmit,
@@ -53,24 +50,66 @@ export const AddRecipe = () => {
                 />
                 <Input
                     label={
-                        <LocalisedText textKey={TextKey.DurationPreparation} />
+                        <LocalisedText textKey={TextKey.RecipeDescription} />
                     }
-                    name="durationPreparation"
-                    register={register}
-                />
-                <Input
-                    label={<LocalisedText textKey={TextKey.DurationCooking} />}
-                    name="durationCooking"
+                    name="recipeDescription"
                     register={register}
                     validation={{ required: true }}
                 />
 
+                {/* TODO 
+                - Daily meal - breakfast | lunch | dinner | snack
+- Type - soup | cake | main course
+                
+                 */}
+
+                <Input
+                    label={
+                        <LocalisedText textKey={TextKey.DurationPreparation} />
+                    }
+                    name="recipeDurationPreparation"
+                    register={register}
+                />
+                <Input
+                    label={<LocalisedText textKey={TextKey.DurationCooking} />}
+                    name="recipeDurationCooking"
+                    register={register}
+                    validation={{ required: true }}
+                />
+
+                <Input
+                    label={
+                        <LocalisedText textKey={TextKey.RecipeServingsNumber} />
+                    }
+                    name="recipeServingsNumber"
+                    register={register}
+                    validation={{ required: true }}
+                    type="number"
+                />
                 {sections.fields.map((field, index) => {
                     return (
                         <div key={`${field.id}`}>
-                            <h3>Sekce</h3>
-                            <p>Description</p>
+                            <Input
+                                label={
+                                    <LocalisedText
+                                        textKey={TextKey.SectionName}
+                                    />
+                                }
+                                name={`sections.${index}.name`}
+                                register={register}
+                                validation={{ required: true }}
+                            />
 
+                            <Input
+                                label={
+                                    <LocalisedText
+                                        textKey={TextKey.SectionDescription}
+                                    />
+                                }
+                                name={`sections.${index}.description`}
+                                register={register}
+                                validation={{ required: true }}
+                            />
                             <IngredientItem
                                 sectionIndex={index}
                                 register={register}
@@ -84,7 +123,9 @@ export const AddRecipe = () => {
                                     sections.remove(index)
                                 }}
                             >
-                                Delete section
+                                <LocalisedText
+                                    textKey={TextKey.DeleteSection}
+                                />
                             </Button>
                         </div>
                     )
@@ -101,12 +142,14 @@ export const AddRecipe = () => {
                         })
                     }}
                 >
-                    Add section
+                    <LocalisedText textKey={TextKey.AddSection} />
                 </Button>
 
+                {/* 
+                Pictures
+                Public checkbox */}
                 <Button type="submit" disabled={mutation.isLoading}>
-                    {/* <LocalisedText textKey={TextKey.Save} /> */}
-                    Save
+                    <LocalisedText textKey={TextKey.Save} />
                 </Button>
             </form>
         </div>

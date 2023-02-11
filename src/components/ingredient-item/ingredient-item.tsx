@@ -1,33 +1,23 @@
 import React from 'react'
+import { LocalisedText } from 'components/localisedText'
+import { TextKey } from 'common/const/localisation/text-keys'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { Button } from 'components/button/button'
 import { Input } from 'components/input/input'
-import { useForm, useFieldArray } from 'react-hook-form'
-import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
-import { collection } from 'firebase/firestore'
-import { auth, firestore } from '../../firebase/firebase'
-import { useAuthUser } from '@react-query-firebase/auth'
+import clsx from 'clsx'
+import css from './ingredient-item.module.scss'
 
 interface IngredientItemProps {
+    control: any
     register: any
     sectionIndex: any
-    control: any
 }
 
 export const IngredientItem = ({
-    sectionIndex,
-    register,
     control,
+    register,
+    sectionIndex,
 }: IngredientItemProps) => {
-    const user = useAuthUser(['user'], auth)
-    const ref = collection(firestore, 'recipes')
-
-    // TODO stil valid ?
-    const mutation = useFirestoreCollectionMutation(ref, {
-        onSuccess: () => {
-            // toast('Saved!')
-        },
-    })
-
     const ingredients = useFieldArray({
         control,
         name: `sections.${sectionIndex}.ingredients`,
@@ -40,23 +30,34 @@ export const IngredientItem = ({
                     return (
                         <li key={`${field.id}`}>
                             <Input
-                                label="Name"
-                                name={`sections.${sectionIndex}.ingredients.${index}.ingredientName`}
+                                label={
+                                    <LocalisedText
+                                        textKey={TextKey.IngredientName}
+                                    />
+                                }
+                                name={`sections.${sectionIndex}.ingredients.${index}.name`}
                                 register={register}
                             />
                             <Input
-                                label="Amount"
+                                label={
+                                    <LocalisedText
+                                        textKey={TextKey.IngredientAmount}
+                                    />
+                                }
                                 name={`sections.${sectionIndex}.ingredients.${index}.amount`}
                                 register={register}
                             />
                             <Input
-                                label="Unit"
+                                label={
+                                    <LocalisedText
+                                        textKey={TextKey.IngredientUnit}
+                                    />
+                                }
                                 name={`sections.${sectionIndex}.ingredients.${index}.unit`}
                                 register={register}
                             />
                             <Button
                                 type="button"
-                                disabled={mutation.isLoading}
                                 onClick={() => {
                                     ingredients.remove(index)
                                 }}
@@ -74,11 +75,11 @@ export const IngredientItem = ({
                     ingredients.append({
                         ingredientName: '',
                         amount: 0,
-                        unit: 'kg',
+                        unit: '',
                     })
                 }}
             >
-                Add ingredient
+                {<LocalisedText textKey={TextKey.AddIngredient} />}
             </Button>
         </React.Fragment>
     )
