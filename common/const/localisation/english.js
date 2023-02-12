@@ -26,4 +26,5 @@ export const EnglishTextKey = {
     [TextKey.IngredientAmount]: 'Amount',
     [TextKey.IngredientUnit]: 'Units',
     [TextKey.AddIngredient]: 'Add ingredient',
+    [TextKey.MakePublic]: 'Make recipe public for other users',
 }

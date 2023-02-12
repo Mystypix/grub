@@ -1,9 +1,11 @@
 import React from 'react'
+import Select from 'react-select'
 import { LocalisedText } from 'components/localisedText'
 import { TextKey } from 'common/const/localisation/text-keys'
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { Button } from 'components/button/button'
 import { Input } from 'components/input/input'
+import ListUnits from 'common/const/lists/units'
 import clsx from 'clsx'
 import css from './ingredient-item.module.scss'
 
@@ -47,15 +49,14 @@ export const IngredientItem = ({
                                 name={`sections.${sectionIndex}.ingredients.${index}.amount`}
                                 register={register}
                             />
-                            <Input
-                                label={
-                                    <LocalisedText
-                                        textKey={TextKey.IngredientUnit}
-                                    />
-                                }
+                            <Controller
                                 name={`sections.${sectionIndex}.ingredients.${index}.unit`}
-                                register={register}
+                                control={control}
+                                render={({ field }) => (
+                                    <Select {...field} options={ListUnits} />
+                                )}
                             />
+
                             <Button
                                 type="button"
                                 onClick={() => {

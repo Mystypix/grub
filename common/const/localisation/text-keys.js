@@ -24,4 +24,5 @@ export const TextKey = {
     IngredientAmount: 'IngredientAmount',
     IngredientUnit: 'IngredientUnit',
     AddIngredient: 'AddIngredient',
+    MakePublic: 'MakePublic',
 }
