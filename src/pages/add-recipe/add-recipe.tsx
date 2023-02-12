@@ -1,21 +1,31 @@
-import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
-import { collection } from 'firebase/firestore'
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { auth, firestore } from '../../firebase/firebase'
-import { Input } from 'components/input/input'
 import { Button } from 'components/button/button'
-import { useAuthUser } from '@react-query-firebase/auth'
-import { toast } from 'react-toastify'
+import { collection } from 'firebase/firestore'
+import { IngredientItem } from 'components/ingredient-item/ingredient-item'
+import { Input } from 'components/input/input'
+import { Link, useNavigate } from 'react-router-dom'
+import { Loader } from '../../components/loader/loader'
+import { LocalisedText } from 'components/localisedText'
 import { TextKey } from 'common/const/localisation/text-keys'
+import { toast } from 'react-toastify'
+import { useAuthUser } from '@react-query-firebase/auth'
+import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
+import { useForm, useFieldArray, Controller } from 'react-hook-form'
+import { useState } from 'react'
 import ListDailyMeals from 'common/const/lists/daily-meals'
 import ListMealType from 'common/const/lists/meal-type'
-import { LocalisedText } from 'components/localisedText'
-import { IngredientItem } from 'components/ingredient-item/ingredient-item'
 import Select from 'react-select'
 
 export const AddRecipe = () => {
+    // TODO go through settings page and explain me more
+    const user = useAuthUser(['user'], auth)
+    const ref = collection(firestore, 'recipes')
+
+    // dont do anything else if the user is loading...
+    if (user.isLoading) {
+        return <Loader />
+    }
+
     const {
         register,
         handleSubmit,
@@ -29,22 +39,27 @@ export const AddRecipe = () => {
 
     const sections = useFieldArray({ control, name: 'sections' })
 
-    const user = useAuthUser(['user'], auth)
-    const ref = collection(firestore, 'recipes')
-
-    // TODO stil valid ?
+    // TODO learn more about collectionMutation and how it works...
     const mutation = useFirestoreCollectionMutation(ref, {
+        // TODO when it is called ? what its purpose?
         onSuccess: () => {
             toast('Saved!')
         },
     })
 
-    const onSubmit = (data) => {
-        console.log(data)
+    // TODO what is next after SAVE - redirection to other page? loader ?
+    const onSubmit = (recipeData) => {
+        // TODO - settings page uses explicit object props. is this necessary?
+        console.log(recipeData)
+        mutation.mutate(recipeData)
     }
 
     return (
         <div>
+            {/* TODO 
+            - styles 
+            - validation
+             */}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     label={<LocalisedText textKey={TextKey.RecipeName} />}
@@ -52,6 +67,7 @@ export const AddRecipe = () => {
                     register={register}
                     validation={{ required: true }}
                 />
+                {/* TODO make description field multi lines - use textarea */}
                 <Input
                     label={
                         <LocalisedText textKey={TextKey.RecipeDescription} />
@@ -63,9 +79,9 @@ export const AddRecipe = () => {
 
                 {/* TODO 
                 Styles for react-select
-                
-                 */}
+                                 */}
 
+                {/* TODO Learn more about the controller and what the hell is { field } ?? - the parameter which is sent internally by react-forms  - https://react-hook-form.com/api/usecontroller/controller */}
                 <Controller
                     name="recipeDailyMeal"
                     control={control}
@@ -88,6 +104,7 @@ export const AddRecipe = () => {
                         />
                     )}
                 />
+                {/* TODO add time units */}
                 <Input
                     label={
                         <LocalisedText textKey={TextKey.DurationPreparation} />
@@ -95,6 +112,7 @@ export const AddRecipe = () => {
                     name="recipeDurationPreparation"
                     register={register}
                 />
+
                 <Input
                     label={<LocalisedText textKey={TextKey.DurationCooking} />}
                     name="recipeDurationCooking"
