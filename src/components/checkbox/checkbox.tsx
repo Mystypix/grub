@@ -1,7 +1,8 @@
 import React from 'react'
+import css from './checkbox.module.scss'
 
 interface CheckboxProps {
-    label?: React.ReactNode
+    label: React.ReactNode
     register: any
     name: string
     defaultValue?: boolean
@@ -14,19 +15,17 @@ export const Checkbox = ({
     ...rest
 }: CheckboxProps) => {
     return (
-        <div className="checkbox-wrapper">
-            <label htmlFor={name} className="checkbox-label">
+        <div className={css.wrapper}>
+            <label htmlFor={name} className={css.label}>
                 {label}
             </label>
             <input
+                className={css.input}
                 type="checkbox"
                 id={name}
                 name={name}
                 defaultChecked={defaultValue}
-                {...register(name)}
-                {...rest}
             />
-            <span className="checkmark"></span>
         </div>
     )
 }

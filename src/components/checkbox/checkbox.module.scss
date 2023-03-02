@@ -1,4 +1,8 @@
-.checkbox-wrapper {
+.wrapper {
+    margin-top: var(--spacing-3);
+}
+
+.label {
     display: inline-block;
     position: relative;
     font-size: 12px;
@@ -7,21 +11,11 @@
     cursor: pointer;
 }
 
-.checkbox-wrapper input {
+.input {
     position: absolute;
     border-radius: 3px;
     border: 1px solid var(--input-border-color);
     padding: 0 var(--spacing-2);
     line-height: 30px;
     cursor: pointer;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 5px;
 }
