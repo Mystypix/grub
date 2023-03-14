@@ -5,6 +5,7 @@ import { auth, firestore } from '../../firebase/firebase'
 import { Input } from 'components/input/input'
 import { useAuthUser } from '@react-query-firebase/auth'
 import { toast } from 'react-toastify'
+import { Checkbox } from 'components/checkbox/checkbox'
 
 export const AddRecipe = () => {
     const [name, setName] = useState('')
@@ -41,6 +42,11 @@ export const AddRecipe = () => {
                 <button disabled={mutation.isLoading} onClick={handleSave}>
                     Save
                 </button>
+                <Checkbox
+                    name="string"
+                    label="string"
+                    register={name}
+                ></Checkbox>
             </form>
         </div>
     )

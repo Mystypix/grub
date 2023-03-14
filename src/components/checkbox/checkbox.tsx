@@ -25,6 +25,8 @@ export const Checkbox = ({
                 id={name}
                 name={name}
                 defaultChecked={defaultValue}
+                {...register(name)}
+                {...rest}
             />
         </div>
     )
