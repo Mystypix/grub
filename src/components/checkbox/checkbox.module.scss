@@ -1,0 +1,21 @@
+.wrapper {
+    margin-top: var(--spacing-3);
+}
+
+.label {
+    display: inline-block;
+    position: relative;
+    font-size: 12px;
+    padding-left: 25px;
+    margin-bottom: 11px;
+    cursor: pointer;
+}
+
+.input {
+    position: absolute;
+    border-radius: 3px;
+    border: 1px solid var(--input-border-color);
+    padding: 0 var(--spacing-2);
+    line-height: 30px;
+    cursor: pointer;
+}
