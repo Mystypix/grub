@@ -1,14 +1,13 @@
 import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
 import { collection } from 'firebase/firestore'
-import { useState } from 'react'
 import { auth, firestore } from '../../firebase/firebase'
 import { Input } from 'components/input/input'
 import { useAuthUser } from '@react-query-firebase/auth'
 import { toast } from 'react-toastify'
 import { Checkbox } from 'components/checkbox/checkbox'
+import { useForm } from 'react-hook-form'
 
 export const AddRecipe = () => {
-    const [name, setName] = useState('')
     const user = useAuthUser(['user'], auth)
     const ref = collection(firestore, 'recipes')
     const mutation = useFirestoreCollectionMutation(ref, {
@@ -17,36 +16,41 @@ export const AddRecipe = () => {
         },
     })
 
-    const handleInputChange = (e) => {
-        setName(e.target.value)
-    }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        defaultValues: {
+            recipeName: '',
+            isPublic: false,
+        },
+    })
 
-    const handleSave = () => {
+    const onSubmit = ({ recipeName, isPublic }) => {
         mutation.mutate({
-            name,
+            recipeName,
+            isPublic,
             userId: user.data?.uid,
         })
     }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     label="Name of the recipe"
                     name="recipeName"
-                    onChange={handleInputChange}
                     type="text"
-                    value={name}
+                    register={register}
                 />
                 {mutation.isError && <p>{mutation.error.message}</p>}
-                <button disabled={mutation.isLoading} onClick={handleSave}>
-                    Save
-                </button>
                 <Checkbox
-                    name="string"
-                    label="string"
-                    register={name}
+                    name="isPublic"
+                    label="Public"
+                    register={register}
                 ></Checkbox>
+                <button disabled={mutation.isLoading}>Save</button>
             </form>
         </div>
     )
