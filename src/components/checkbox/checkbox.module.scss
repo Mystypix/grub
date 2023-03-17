@@ -1,21 +1,31 @@
-.wrapper {
-    margin-top: var(--spacing-3);
-}
-
-.label {
-    display: inline-block;
-    position: relative;
-    font-size: 12px;
-    padding-left: 25px;
-    margin-bottom: 11px;
-    cursor: pointer;
-}
-
 .input {
-    position: absolute;
-    border-radius: 3px;
-    border: 1px solid var(--input-border-color);
-    padding: 0 var(--spacing-2);
-    line-height: 30px;
-    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        background: #fff;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 1px solid #000;
+        border-radius: 3px;
+    }
+
+    &:checked::before {
+        content: '\2713';
+        font-size: 25px;
+        color: #fff;
+        background: #8ac43f;
+        text-align: center;
+        line-height: 18px;
+    }
 }
